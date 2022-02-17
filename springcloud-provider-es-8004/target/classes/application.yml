@@ -1,0 +1,41 @@
+server:
+  port: 8004
+  servlet:
+    context-path: /community
+
+spring:
+  application:
+    name: springcloud-provider-es
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/community?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
+    username: root
+    password: 123456
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+  data:
+    elasticsearch:
+      cluster-name: swim
+      cluster-nodes: 127.0.0.1:9300
+
+mybatis:
+  type-aliases-package: com.swim.community.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    use-generated-keys: true
+    map-underscore-to-camel-case: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: springcloud-provider-es8004  # 修改eureka上的默认描述信息
+    prefer-ip-address: true
+
+info:
+  app.name: swim-community-springcloud
+  company.name: xxx.xxx.xxx
